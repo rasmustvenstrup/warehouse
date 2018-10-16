@@ -36,6 +36,11 @@ namespace Warehouse
 
             Action<DbContextOptionsBuilder> optionsAction = options =>
             {
+                // TODO: Find ud af tracke changes så EF kun opdaterer felter som er ændret.
+                // TODO: Lav også ADO og Dapper repositories og mål performance.
+                // TODO: Lav Unit of Work
+
+
                 // TODO: Brug ConnectionString fra AppSettings i stedet.
                 options.UseSqlite("Data Source=Warehouse.db");
                 options.EnableSensitiveDataLogging();

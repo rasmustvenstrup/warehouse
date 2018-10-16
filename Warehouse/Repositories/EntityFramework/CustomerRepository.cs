@@ -14,12 +14,6 @@ namespace Warehouse.Repositories.EntityFramework
         public CustomerRepository(CustomerDbContext context)
         {
             _context = context;
-
-            // TODO: Find ud af tracke changes så EF kun opdaterer felter som er ændret.
-
-            // TODO: Lav også ADO og Dapper repositories og mål performance.
-
-            // TODO: Lav Unit of Work
         }
 
         public async Task Add(Customer customer)
