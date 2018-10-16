@@ -50,9 +50,9 @@ namespace Warehouse.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Buy()
-        {
+        //public async Task<IActionResult> Buy()
+        //{
 
-        }
+        //}
     }
 }
