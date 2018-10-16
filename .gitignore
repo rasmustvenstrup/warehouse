@@ -1,0 +1,43 @@
+#Visual Studio files
+*.Publish.xml
+*.[Oo]bj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*.docstates
+*.opensdf
+*.vsp
+ipch/
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+[Tt]estResults*/
+TDD*/
+Ankh.NoLoad
+*.suo
+*.orig
+**/App_Data/*.XML
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
+# Jetbrains Rider directory
+.idea/
