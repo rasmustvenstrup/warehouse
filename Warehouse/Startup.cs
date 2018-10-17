@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Warehouse.Contracts;
 using Warehouse.DbContexts;
+using Warehouse.Repositories;
 using Warehouse.Repositories.EntityFramework;
 
 namespace Warehouse
@@ -51,6 +52,7 @@ namespace Warehouse
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

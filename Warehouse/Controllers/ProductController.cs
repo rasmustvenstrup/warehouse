@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Contracts;
@@ -10,11 +9,12 @@ namespace Warehouse.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
-        private readonly string _productImagesPath = "ProductImages";
+        private readonly IImageRepository _imageRepository;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository, IImageRepository imageRepository)
         {
             _productRepository = productRepository;
+            _imageRepository = imageRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -35,13 +35,7 @@ namespace Warehouse.Controllers
         {
             if (file != null && file.Length != 0)
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", _productImagesPath, file.FileName);
-
-                using (var stream = new FileStream(path, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-
+                await _imageRepository.Add(file);
                 product.ImageName = file.FileName;
             }
             
@@ -50,9 +44,13 @@ namespace Warehouse.Controllers
             return RedirectToAction("Index");
         }
 
-        //public async Task<IActionResult> Buy()
-        //{
+        public async Task<IActionResult> Delete(int id)
+        {
+            Product product = await _productRepository.Get(id);
+            await _productRepository.Delete(product);
+            _imageRepository.Delete(product.ImageName);
 
-        //}
+            return RedirectToAction("Index");
+        }
     }
 }
