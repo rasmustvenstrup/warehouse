@@ -2,9 +2,8 @@
 
 namespace Warehouse.Entities
 {
-    public class Customer
+    public class Customer : Entity
     {
-        public int Id { get; set; }
         public Sex Sex { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

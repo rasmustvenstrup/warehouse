@@ -52,5 +52,10 @@ namespace Warehouse.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult AddToShoppingCart()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

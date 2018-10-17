@@ -1,15 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Warehouse.Entities;
+﻿using Warehouse.Entities;
 
 namespace Warehouse.Contracts
 {
-    public interface ICustomerRepository
+    public interface ICustomerRepository : IDatabaseRepository<Customer>
     {
-        Task Add(Customer customer);
-        Task Update(Customer customer);
-        Task Delete(Customer customer);
-        Task<Customer> Get(int id);
-        Task<IEnumerable<Customer>> GetAll();
     }
 }
