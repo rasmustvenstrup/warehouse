@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Warehouse.Contracts;
 using Warehouse.DbContexts;
+using Warehouse.Entities;
 using Warehouse.Repositories;
 using Warehouse.Repositories.EntityFramework;
 
@@ -49,9 +50,9 @@ namespace Warehouse
             services.AddDbContext<CustomerDbContext>(optionsAction);
             services.AddDbContext<OrderDbContext>(optionsAction);
             services.AddDbContext<ProductDbContext>(optionsAction);
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IDatabaseRepository<Customer>, CustomerRepository>();
+            services.AddScoped<IDatabaseRepository<Order>, OrderRepository>();
+            services.AddScoped<IDatabaseRepository<Product>, ProductRepository>();
             services.AddScoped<IImageRepository, ImageRepository>();
         }
 

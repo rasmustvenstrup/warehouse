@@ -7,7 +7,7 @@ using Warehouse.Entities;
 
 namespace Warehouse.Repositories.EntityFramework
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : IDatabaseRepository<Customer>
     {
         private readonly CustomerDbContext _context;
 

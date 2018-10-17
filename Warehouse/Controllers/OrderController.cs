@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Contracts;
+using Warehouse.Entities;
 
 namespace Warehouse.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IOrderRepository _orderRepository;
+        private readonly IDatabaseRepository<Order> _orderRepository;
 
-        public OrderController(IOrderRepository orderRepository)
+        public OrderController(IDatabaseRepository<Order> orderRepository)
         {
             _orderRepository = orderRepository;
         }

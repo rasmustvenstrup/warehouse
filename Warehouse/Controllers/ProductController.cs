@@ -8,10 +8,10 @@ namespace Warehouse.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IDatabaseRepository<Product> _productRepository;
         private readonly IImageRepository _imageRepository;
 
-        public ProductController(IProductRepository productRepository, IImageRepository imageRepository)
+        public ProductController(IDatabaseRepository<Product> productRepository, IImageRepository imageRepository)
         {
             _productRepository = productRepository;
             _imageRepository = imageRepository;

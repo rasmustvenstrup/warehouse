@@ -2,15 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Contracts;
 using Warehouse.Entities;
-using Warehouse.Repositories;
 
 namespace Warehouse.Controllers
 {
     public class CustomerController : Controller
     {
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IDatabaseRepository<Customer> _customerRepository;
 
-        public CustomerController(ICustomerRepository customerRepository)
+        public CustomerController(IDatabaseRepository<Customer> customerRepository)
         {
             _customerRepository = customerRepository;
         }

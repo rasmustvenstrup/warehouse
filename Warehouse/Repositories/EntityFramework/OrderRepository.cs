@@ -7,7 +7,7 @@ using Warehouse.Entities;
 
 namespace Warehouse.Repositories.EntityFramework
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository : IDatabaseRepository<Order>
     {
         private readonly OrderDbContext _context;
 
