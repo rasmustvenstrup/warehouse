@@ -42,11 +42,12 @@ namespace Warehouse
                 // TODO: Lav også ADO og Dapper repositories og mål performance.
                 // TODO: Lav Unit of Work
 
-
                 // TODO: Brug ConnectionString fra AppSettings i stedet.
                 options.UseSqlite("Data Source=Warehouse.db");
                 options.EnableSensitiveDataLogging();
             };
+
+            // TODO: Skal vi kun have en DbContext?
             services.AddDbContext<CustomerDbContext>(optionsAction);
             services.AddDbContext<OrderDbContext>(optionsAction);
             services.AddDbContext<ProductDbContext>(optionsAction);
