@@ -9,35 +9,31 @@ namespace Warehouse.Repositories.EntityFramework
 {
     public class CustomerRepository : IDatabaseRepository<Customer>
     {
-        private readonly CustomerDbContext _context;
+        private readonly DatabaseContext _context;
 
-        public CustomerRepository(CustomerDbContext context)
+        public CustomerRepository(DatabaseContext context)
         {
             _context = context;
         }
 
-        public async Task Add(Customer customer)
+        public void Add(Customer customer)
         {
             _context.Customers.Add(customer);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task Update(Customer customer)
+        public void Update(Customer customer)
         {
             _context.Customers.Update(customer);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(Customer customer)
+        public void Delete(Customer customer)
         {
             _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
         }
 
         public async Task<Customer> Get(int id)
         {
-            Customer customer1 = await _context.Customers.SingleAsync(customer => customer.Id == id);
-            return customer1;
+            return await _context.Customers.SingleAsync(customer => customer.Id == id);
         }
 
         public async Task<IEnumerable<Customer>> GetAll()

@@ -6,9 +6,9 @@ namespace Warehouse.Contracts
 {
     public interface IDatabaseRepository<T> where T : Entity
     {
-        Task Add(T entity);
-        Task Update(T entity);
-        Task Delete(T entity);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
         Task<T> Get(int id);
         Task<IEnumerable<T>> GetAll();
     }

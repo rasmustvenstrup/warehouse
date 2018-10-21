@@ -7,23 +7,24 @@ namespace Warehouse.Controllers
 {
     public class CustomerController : Controller
     {
-        private readonly IDatabaseRepository<Customer> _customerRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CustomerController(IDatabaseRepository<Customer> customerRepository)
+        public CustomerController(IUnitOfWork unitOfWork)
         {
-            _customerRepository = customerRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> Index()
         {
-            var customers = await _customerRepository.GetAll();
+            var customers = await _unitOfWork.CustomerRepository.GetAll();
 
-            return View(customers);
+            return View(customers); 
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            Customer customer = await _customerRepository.Get(id);
+            Customer customer = await _unitOfWork.CustomerRepository.Get(id);
+
             return View(customer);
         }
 
@@ -31,7 +32,8 @@ namespace Warehouse.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Customer customer)
         {
-            await _customerRepository.Update(customer);
+            _unitOfWork.CustomerRepository.Update(customer);
+            await _unitOfWork.Commit();
 
             return RedirectToAction("Index");
         }
@@ -45,15 +47,17 @@ namespace Warehouse.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Customer customer)
         {
-            await _customerRepository.Add(customer);
+            _unitOfWork.CustomerRepository.Add(customer);
+            await _unitOfWork.Commit();
 
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            Customer customer = await _customerRepository.Get(id);
-            await _customerRepository.Delete(customer);
+            Customer customer = await _unitOfWork.CustomerRepository.Get(id);
+            _unitOfWork.CustomerRepository.Delete(customer);
+            await _unitOfWork.Commit();
 
             return RedirectToAction("Index");
         }

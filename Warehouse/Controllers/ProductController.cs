@@ -8,18 +8,16 @@ namespace Warehouse.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IDatabaseRepository<Product> _productRepository;
-        private readonly IImageRepository _imageRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductController(IDatabaseRepository<Product> productRepository, IImageRepository imageRepository)
+        public ProductController(IUnitOfWork unitOfWork)
         {
-            _productRepository = productRepository;
-            _imageRepository = imageRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> Index()
         {
-            var products = await _productRepository.GetAll();
+            var products = await _unitOfWork.ProductRepository.GetAll();
 
             return View(products);
         }
@@ -35,20 +33,22 @@ namespace Warehouse.Controllers
         {
             if (file != null && file.Length != 0)
             {
-                await _imageRepository.Add(file);
+                await _unitOfWork.ImageRepository.Add(file);
                 product.ImageName = file.FileName;
             }
             
-            await _productRepository.Add(product);
+            _unitOfWork.ProductRepository.Add(product);
+            await _unitOfWork.Commit();
 
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            Product product = await _productRepository.Get(id);
-            await _productRepository.Delete(product);
-            _imageRepository.Delete(product.ImageName);
+            Product product = await _unitOfWork.ProductRepository.Get(id);
+            _unitOfWork.ProductRepository.Delete(product);
+            _unitOfWork.ImageRepository.Delete(product.ImageName);
+            await _unitOfWork.Commit();
 
             return RedirectToAction("Index");
         }

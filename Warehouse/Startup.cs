@@ -44,15 +44,9 @@ namespace Warehouse
 
             // TODO: Find ud af tracke changes så EF kun opdaterer felter som er ændret.
             // TODO: Lav også ADO og Dapper repositories og mål performance.
-            // TODO: Lav Unit of Work
-            // TODO: Skal vi kun have en DbContext?
-            services.AddDbContext<CustomerDbContext>(optionsAction);
-            services.AddDbContext<OrderDbContext>(optionsAction);
-            services.AddDbContext<ProductDbContext>(optionsAction);
-            services.AddScoped<IDatabaseRepository<Customer>, CustomerRepository>();
-            services.AddScoped<IDatabaseRepository<Order>, OrderRepository>();
-            services.AddScoped<IDatabaseRepository<Product>, ProductRepository>();
-            services.AddScoped<IImageRepository, ImageRepository>();
+
+            services.AddDbContext<DatabaseContext>(optionsAction);
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,29 +9,26 @@ namespace Warehouse.Repositories.EntityFramework
 {
     public class OrderRepository : IDatabaseRepository<Order>
     {
-        private readonly OrderDbContext _context;
+        private readonly DatabaseContext _context;
 
-        public OrderRepository(OrderDbContext context)
+        public OrderRepository(DatabaseContext context)
         {
             _context = context;
         }
 
-        public async Task Add(Order order)
+        public void Add(Order order)
         {
             _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task Update(Order order)
+        public void Update(Order order)
         {
             _context.Orders.Update(order);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(Order order)
+        public void Delete(Order order)
         {
             _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
         }
 
         public async Task<Order> Get(int id)

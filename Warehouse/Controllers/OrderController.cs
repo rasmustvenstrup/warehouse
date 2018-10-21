@@ -1,22 +1,21 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.Contracts;
-using Warehouse.Entities;
 
 namespace Warehouse.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IDatabaseRepository<Order> _orderRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OrderController(IDatabaseRepository<Order> orderRepository)
+        public OrderController(IUnitOfWork unitOfWork)
         {
-            _orderRepository = orderRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> Index()
         {
-            var orders = await _orderRepository.GetAll();
+            var orders = await _unitOfWork.OrderRepository.GetAll();
 
             return View(orders);
         }
