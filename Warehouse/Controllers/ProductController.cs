@@ -47,7 +47,12 @@ namespace Warehouse.Controllers
         {
             Product product = await _unitOfWork.ProductRepository.Get(id);
             _unitOfWork.ProductRepository.Delete(product);
-            _unitOfWork.ImageRepository.Delete(product.ImageName);
+
+            if (!string.IsNullOrEmpty(product.ImageName))
+            {
+                _unitOfWork.ImageRepository.Delete(product.ImageName);
+            }
+
             await _unitOfWork.Commit();
 
             return RedirectToAction("Index");

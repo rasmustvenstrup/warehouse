@@ -12,5 +12,13 @@ namespace Warehouse.DbContexts
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderProduct>()
+                .HasOne(bc => bc.Order)
+                .WithMany(b => b.Products)
+                .HasForeignKey(bc => bc.OrderId);
+        }
     }
 }
